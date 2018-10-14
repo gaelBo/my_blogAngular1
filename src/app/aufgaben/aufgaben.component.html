@@ -1,0 +1,46 @@
+<li class="list-group-item">
+  <br><br>
+ <hr>
+    <div style="width:20px;height:20px;background-color:red;" 
+  
+         *ngIf="aufgabeStatus === 'Erledigt'">
+        </div>
+  
+    <h4>Aufgaben : {{ aufgabeName }} -- Statut : {{ geAufgabeStatus() }}</h4>
+  
+    <input type="text" class="form-control" [(ngModel)]="aufgabeName">
+   
+    <div *ngFor="let aufgaben of aufgabens; index as i ">
+
+       <h4>Task {{i}} : {{aufgaben.name}} </h4>
+       <h4 [ngStyle]="{color: getColorAufgabe(i)}">- {{aufgaben.status}}</h4> 
+
+    </div>
+
+   <!--
+    <hr>
+  <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+            <h4>Aufgabeliste:</h4>
+          <ul class="list-group">
+            <app-aufgaben  *ngFor="let aufgaben of aufgabens"
+                           [aufagebeName]="aufgaben.name"
+                           [aufgabeStatus]="aufgaben.status">
+            </app-aufgaben>
+
+          </ul>
+    
+          <button class="btn btn-success"
+    
+                  [disabled]="true"
+    
+                  (click)="onbesteatigung()">Alle wurden erledigt</button>
+    
+        </div>
+    
+      </div>
+    
+    </div>
+
+    -->

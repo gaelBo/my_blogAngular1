@@ -1,0 +1,11 @@
+
+<li class="list-group-item">
+
+    <h4>EventInfos  : {{ eventName }} <br>
+       -- Adresse : {{eventAdresse}} <br>
+       -- Mehr Infos : {{eventSonstige}} <br> <br>  
+       -- Datum : {{date |async | date: 'EEEE, dd MMMM   y' }} <br>
+       </h4>
+    Eventname ändert: <input type="text" class="form-control" [(ngModel)]="eventName">
+  
+  </li>
