@@ -1,0 +1,31 @@
+
+<div *ngFor="let blog of blogs; index as i ">
+  <!--//style="background-color:getColorBlog();"
+     *ngIf="blog.postLoveIts >=0" -->
+<p [ngStyle]="{color: getColorBlog(i)}" 
+style="background-color:rgba(27, 218, 252, 0.993);"
+
+> 
+  <li class="list-group-item">
+
+    <h4>Post {{i+1}} : {{blog.postTitle}}</h4><br>
+       - {{blog.postContent}} <br>
+        Le {{blog.postCreated_at  | date: 'EEEE, dd MMMM   y' }} <br>
+        <br> <br> 
+       - love : {{blog.postLoveIts}}  
+       <button class="btn btn-success"
+       style="background-color:rgb(0, 255, 55);"
+       (click)="incrementLoveIts(i)">Love it!
+      </button>
+      
+       <button class="btn btn-success" 
+       style="background-color:red;"
+       (click)="decrementLoveIts(i)">Don't love it !
+      </button>
+      
+   <hr>
+  
+   
+</p>
+ </div>
+ <br> Totaux de Posts: {{postCompteur}}
