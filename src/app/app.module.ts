@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { PostListItemComponentComponent } from './post-list-item-component/post-list-item-component.component';
 import { AppareilComponent } from './appareil/appareil.component';
 import {AppareilService} from './services/appareil.service';
+import {AuthService} from './services/auth.service';
+
 import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 import {Routes, RouterModule} from '@angular/router';
@@ -30,7 +32,10 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AppareilService],
+  providers: [
+    AppareilService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
