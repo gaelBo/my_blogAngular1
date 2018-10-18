@@ -7,19 +7,29 @@ import { PostListItemComponentComponent } from './post-list-item-component/post-
 import { AppareilComponent } from './appareil/appareil.component';
 import {AppareilService} from './services/appareil.service';
 import {AuthService} from './services/auth.service';
+import {AuthGuard} from './services/auth-guard.service';
+
 
 import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 import {Routes, RouterModule} from '@angular/router';
 import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
+import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
+/**
+ * canActivate permmettra donc de proteger la page appareil 
+ * par une auth au préalable
+ */
 const appRoutes: Routes = [
-  { path: 'appareils', component: AppareilViewComponent },
+  { path: 'appareils', canActivate:[AuthGuard], component: AppareilViewComponent },
    //le : avant un fragment de route declare ce fragment comme étant un param
-  { path: 'appareils/:id', component: SingleAppareilComponent },
+  { path: 'appareils/:id',canActivate:[AuthGuard], component: SingleAppareilComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'posts', component: PostListItemComponentComponent },
-  { path: '', component: AppareilViewComponent }
+  { path: '', component: AppareilViewComponent },
+  { path: 'not-found', component:FourOhFourComponent },
+  { path: '**', redirectTo: 'not-found' }
+
 ];
 
 @NgModule({
@@ -29,7 +39,8 @@ const appRoutes: Routes = [
     AppareilComponent,
     AuthComponent,
     AppareilViewComponent,
-    SingleAppareilComponent
+    SingleAppareilComponent,
+    FourOhFourComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +49,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     AppareilService,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
