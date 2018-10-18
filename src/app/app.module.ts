@@ -11,9 +11,12 @@ import {AuthService} from './services/auth.service';
 import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 import {Routes, RouterModule} from '@angular/router';
+import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
 
 const appRoutes: Routes = [
   { path: 'appareils', component: AppareilViewComponent },
+   //le : avant un fragment de route declare ce fragment comme étant un param
+  { path: 'appareils/:id', component: SingleAppareilComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'posts', component: PostListItemComponentComponent },
   { path: '', component: AppareilViewComponent }
@@ -25,7 +28,8 @@ const appRoutes: Routes = [
     PostListItemComponentComponent,
     AppareilComponent,
     AuthComponent,
-    AppareilViewComponent
+    AppareilViewComponent,
+    SingleAppareilComponent
   ],
   imports: [
     BrowserModule,

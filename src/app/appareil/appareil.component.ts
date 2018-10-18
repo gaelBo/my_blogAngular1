@@ -9,9 +9,12 @@ import { AppareilService } from '../services/appareil.service';
 })
 export class AppareilComponent implements OnInit {
 
-  @Input() index:number;
   @Input() appareilName:string;
   @Input() appareilStatus: string;
+  @Input() index:number;
+//pour rentre l app unique pendant la nav entre les page
+  @Input() id:number;
+
 
 
   constructor(private appareilService:AppareilService) { }
