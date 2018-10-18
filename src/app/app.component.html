@@ -4,57 +4,26 @@
    <i> Welcome to {{ title }}! </i>
   </h1>
 </div>
-<h2 style="color:blue">I- Verwaltung von Hausgeräte</h2>
-<div class="container">
-    <div class="row">
-      <div class="col-xs-4">
-        <h2>Mes appareils</h2> <i>Mise à jour : {{lastUpdate | async | date: ' hh:mm EEEE dd MMMM y'  }}</i>
-        <ul class="list-group">
-          <app-appareil *ngFor="let appareil of appareils; let i=index"
-                        [appareilName]="appareil.name"
-                        [appareilStatus]="appareil.status" 
-                        [index]="i">
-          </app-appareil>
-        </ul>
 
-        <button class="btn btn-success" [disabled]="!isAuth"
-                        (click)="onAllumer()">
-          Tout allumer
-        </button>
-
-        <button class="btn btn-success" [disabled]="!isAuth"
-        (click)="onEteindre()">
-        Tout éteindre 
-        </button>
-
+<!--  Bar de navigation -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-collapse">
+          <ul class="nav navbar-nav">
+              <li routerLinkActive="active"><a routerLink="auth">Authentification</a></li>
+              <li routerLinkActive="active"><a routerLink="posts">Mes Posts</a></li>
+              <li routerLinkActive="active"><a routerLink="appareils">Appareils</a></li>
+          </ul>
       </div>
     </div>
-  </div>
+  </nav>
 
 
-
-
-
-<h2 style="color:blue"> II- Online Posts</h2>
+<!--  contenu-->
 <div class="container">
-<div class="row">
-<div class="col-xs-12">
-<h2> Mes Posts </h2>
-<ul class="list-group">
-
-  <table border="0">
-    <tr>
-      <th>
-          <app-post-list-item-component></app-post-list-item-component>
-
-      </th>
-      <th>
-          Verification WWW....
-
-      </th>
-    </tr>
-  </table>
- </ul>
-</div>
-</div>
+  <div class="row">
+    <div class="col-xs-12">
+       <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

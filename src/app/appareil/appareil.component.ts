@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Services } from '@angular/core/src/view';
-import { AppareilServices } from '../services/appareil.service';
+import { AppareilService } from '../services/appareil.service';
 
 @Component({
   selector: 'app-appareil',
@@ -14,7 +14,7 @@ export class AppareilComponent implements OnInit {
   @Input() appareilStatus: string;
 
 
-  constructor(private appareilService:AppareilServices) { }
+  constructor(private appareilService:AppareilService) { }
 
   ngOnInit() {
   }

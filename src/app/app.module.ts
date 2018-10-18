@@ -5,19 +5,32 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { PostListItemComponentComponent } from './post-list-item-component/post-list-item-component.component';
 import { AppareilComponent } from './appareil/appareil.component';
-import {AppareilServices} from './services/appareil.service';
+import {AppareilService} from './services/appareil.service';
+import { AuthComponent } from './auth/auth.component';
+import { AppareilViewComponent } from './appareil-view/appareil-view.component';
+import {Routes, RouterModule} from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'appareils', component: AppareilViewComponent },
+  { path: 'auth', component: AuthComponent },
+  { path: 'posts', component: PostListItemComponentComponent },
+  { path: '', component: AppareilViewComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     PostListItemComponentComponent,
-    AppareilComponent
+    AppareilComponent,
+    AuthComponent,
+    AppareilViewComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [AppareilServices],
+  providers: [AppareilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
