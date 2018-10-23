@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppareilService } from '../services/appareil.service';
+import {Subscription} from 'rxjs/Subscription';
 
 
 @Component({
@@ -7,10 +8,11 @@ import { AppareilService } from '../services/appareil.service';
   templateUrl: './appareil-view.component.html',
   styleUrls: ['./appareil-view.component.css']
 })
-export class AppareilViewComponent implements OnInit {
+export class AppareilViewComponent implements OnInit, OnDestroy {
 
   isAuth=false;
   appareils:any[];
+  appareilSubscription:Subscription;
 
   //un Promise qui affiche la date apres 2s
   lastUpdate = new Promise((resolve, reject) => {
@@ -35,9 +37,16 @@ export class AppareilViewComponent implements OnInit {
    }
 
    
-  ngOnInit() {
-    this.appareils=this.appareilService.appareils;
+   ngOnInit() {
+     //on affecte le array au arra local
+    this.appareilSubscription = this.appareilService.appareilsSubject.subscribe(
+      (appareils: any[]) => {
+        this.appareils = appareils;
+      }
+    );
+    this.appareilService.emitAppareilSubject();
   }
+
 
   onAllumer() {
     this.appareilService.switchOnAll();
@@ -49,6 +58,10 @@ export class AppareilViewComponent implements OnInit {
     } else {
       return null;
     }
+  }
+
+  ngOnDestroy() {
+    this.appareilSubscription.unsubscribe();
   }
 
 
