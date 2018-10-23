@@ -2,12 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostListItemComponentComponent } from './post-list-item-component/post-list-item-component.component';
 import { AppareilComponent } from './appareil/appareil.component';
 import {AppareilService} from './services/appareil.service';
 import {AuthService} from './services/auth.service';
+import {UserService} from './services/user.service';
 import {AuthGuard} from './services/auth-guard.service';
+
 
 
 import { AuthComponent } from './auth/auth.component';
@@ -16,6 +18,7 @@ import {Routes, RouterModule} from '@angular/router';
 import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 /**
  * canActivate permmettra donc de proteger la page appareil 
@@ -27,6 +30,7 @@ const appRoutes: Routes = [
   { path: 'appareils/:id',canActivate:[AuthGuard], component: SingleAppareilComponent },
   {path: 'edit', canActivate:[AuthGuard], component:EditAppareilComponent},
   { path: 'auth', component: AuthComponent },
+  { path: 'users', component: UserListComponent },
   { path: 'posts', component: PostListItemComponentComponent },
   { path: '', component: AppareilViewComponent },
   { path: 'not-found', component:FourOhFourComponent },
@@ -43,16 +47,19 @@ const appRoutes: Routes = [
     AppareilViewComponent,
     SingleAppareilComponent,
     FourOhFourComponent,
-    EditAppareilComponent
+    EditAppareilComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
     AppareilService,
     AuthService,
+    UserService,
     AuthGuard
   ],
   bootstrap: [AppComponent]
