@@ -21,8 +21,21 @@
           <option value="jus de mangue">Jus de mangue</option>
         </select>
       </div>
+
+      <!-- ajout dynamique des <input>
+      formArrayName doit correspondre au nom choisie dans notre TypeScript 
+    i permet de diff les Hobbies-->
+      <div formArrayName="hobbies">
+          Vos hobbies:
+          <div class="form-group" *ngFor="let hobbyControl of getHobbies().controls; let i = index">
+            <input type="text" class="form-control" [formControlName]="i">
+          </div>
+          <button type="button" class="btn btn-success" (click)="onAddHobby()">Ajouter un hobby</button>
+    </div>
+    
       <!-- le button Submit appel l'evenemnt ngSubmit qui 
       lui appel onSubmitForm()-->
-      <button type="submit" class="btn btn-primary">Soumettre</button>
+      <button type="submit" class="btn btn-primary"
+       [disabled]="userForm.invalid">Soumettre</button>
     </form>
   </div>

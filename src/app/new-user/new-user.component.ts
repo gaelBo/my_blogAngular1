@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormArray} from '@angular/forms';
 import {UserService} from '../services/user.service';
 import {Router } from '@angular/router';
 import { User} from '../models/User.model';
@@ -28,10 +28,14 @@ export class NewUserComponent implements OnInit {
   //creer formGroup grace a Builder
   initForm(){
     this.userForm = this.formBuilder.group({
-      firstName: '',
-      lastName: '',
-      email: '',
-      drinkPreference: ''
+      //Validators.required verifie que le chqmp
+      //n est pas  libre avant l envoi...
+      firstName: ['',Validators.required],
+      lastName: ['',Validators.required],
+      email: ['',[Validators.required, Validators.email]],
+      drinkPreference: ['',Validators.required],
+      //ajout d un form dynamique
+      hobbies:this.formBuilder.array([])
     });
   }
 
@@ -41,10 +45,23 @@ export class NewUserComponent implements OnInit {
       formValue['firstName'],
       formValue['lastName'],
       formValue['email'],
-      formValue['drinkPreference']
+      formValue['drinkPreference'],
+      //recuperation du form dynamique
+      formValue['hobbies']? formValue['hobbies']:[]
     );
     this.userService.addUser(newUser);
     this.router.navigate(['/users']);
   }
+
+  //pour resoudre le pb typage 
+  //et recuperer les donnees dans ce form dynamique
+  getHobbies():FormArray{
+    return this.userForm.get('hobbies')as FormArray;
+  }
+
+  onAddHobby() {
+    const newHobbyControl = this.formBuilder.control(null, Validators.required);
+    this.getHobbies().push(newHobbyControl);
+}
 
 }
