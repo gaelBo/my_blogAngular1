@@ -17,11 +17,17 @@ export class UserListComponent implements OnInit {
   constructor(private userService:UserService) { }
 
   ngOnInit() {
+    /*
+    Ce component très simple souscrit au Subject dans  UserService  
+    et le déclenche pour en récupérer les informations 
+    et les rendre disponibles au template
+    */
     this.userSubscription=this.userService.userSubject.subscribe(
       (users:User[])=>{
         this.users=users;
       }
     );
+    //rend dispo au template
     this.userService.emitUsers();
   }
 
